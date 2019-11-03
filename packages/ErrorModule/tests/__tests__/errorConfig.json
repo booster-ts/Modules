@@ -1,0 +1,10 @@
+{
+    "00": {
+        "why": "No Error",
+        "httpCode": 200
+    },
+    "01": {
+        "why": "Info Not Found",
+        "httpCode": 404
+    }
+}

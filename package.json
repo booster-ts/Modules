@@ -1,0 +1,13 @@
+{
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "test": "lerna run test:unit",
+    "install": "lerna run setup",
+    "build": "lerna run build",
+    "lerna:publish": "lerna publish prerelease --yes --npm-client yarn --preid beta --npm-tag beta"
+  },
+  "devDependencies": {
+    "lerna": "^3.18.3"
+  }
+}

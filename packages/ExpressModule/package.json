@@ -1,0 +1,29 @@
+{
+  "name": "@booster-ts/express-module",
+  "version": "0.0.1",
+  "description": "Error Module For Server",
+  "main": "dist/Express.js",
+  "scripts": {
+    "setup": "npm ci || npm i",
+    "test:unit": "true",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "ImOverlord",
+  "license": "ISC",
+  "dependencies": {
+    "@booster-ts/core": "^0.2.1",
+    "@types/express": "^4.17.2",
+    "express": "^4.17.1",
+    "reflect-metadata": "^0.1.13",
+    "typescript": "^3.6.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.20",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0"
+  },
+  "peerDependencies": {
+    "@types/express": "^4.17.2"
+  }
+}

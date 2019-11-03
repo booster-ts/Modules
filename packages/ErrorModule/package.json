@@ -1,0 +1,24 @@
+{
+  "name": "@booster-ts/error-module",
+  "version": "0.0.1",
+  "description": "Error Module For Server",
+  "main": "dist/Error.js",
+  "scripts": {
+    "setup": "npm ci || npm i",
+    "test:unit": "jest -c tests/jest.unit.js",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "ImOverlord",
+  "license": "ISC",
+  "dependencies": {
+    "@booster-ts/core": "^0.2.1",
+    "reflect-metadata": "^0.1.13",
+    "typescript": "^3.6.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.20",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0"
+  }
+}
