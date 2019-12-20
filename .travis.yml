@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - '8'
+  - '10'
+  - '12'
+  - '13'
+
+cache: npm
+
+install:
+  - npm i -g lerna
+  - lerna bootstrap
+
+script:
+  - lerna run test:unit
+  - lerna run test:func

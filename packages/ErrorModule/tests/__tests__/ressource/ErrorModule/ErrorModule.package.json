@@ -1,0 +1,5 @@
+{
+    "booster": {
+        "error-module": "ErrorModule.error.json"
+    }
+}
