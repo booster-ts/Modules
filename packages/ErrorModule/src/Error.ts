@@ -1,7 +1,6 @@
 import { booster } from '@booster-ts/core';
 import { loadMainPackageJSON } from './utils';
 import { join } from 'path';
-import { readdirSync } from 'fs';
 
 @booster()
 export class ErrorModule {
@@ -15,17 +14,21 @@ export class ErrorModule {
         this.errorCodes = require.main.require(join(options.path, options.package.booster["error-module"]));
     }
 
-    public createError(code: string, from: string = "", systemError: any = null): ErrorContent {
-        const error: ErrorContent = {
+    /**
+     * createError
+     * @param code Error Code
+     * @param from Where the Error Occured
+     * @param overides Value that should be overidden from Error Conf file
+     * @param systemError NodeJS Error StackTrace
+     */
+    public createError(code: string, from: string = "", overides = {}, systemError: any = null): ErrorContent {
+        let error: ErrorContent = {
             code,
             why: this.errorCodes[code]["why"] || "",
             from,
             systemError
         }
-        Object.keys(this.errorCodes[code])
-        .forEach((key) => {
-            error[key] = this.errorCodes[code][key];
-        })
+        error = { ...error, ...this.errorCodes[code], ...overides };
         return error;
     }
 

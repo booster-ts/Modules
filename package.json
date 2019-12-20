@@ -4,8 +4,7 @@
   "scripts": {
     "test": "lerna run test:unit",
     "install": "lerna run setup",
-    "build": "lerna run build",
-    "lerna:publish": "lerna publish prerelease --yes --npm-client yarn --preid beta --npm-tag beta"
+    "build": "lerna run build"
   },
   "devDependencies": {
     "lerna": "^3.18.3"

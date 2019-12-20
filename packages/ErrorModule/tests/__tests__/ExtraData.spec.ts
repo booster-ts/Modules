@@ -7,8 +7,8 @@ jest.mock('../../src/utils', () => {
     return {
         loadMainPackageJSON: () => {
             return {
-                package: require(join(__dirname, "ressource/ErrorModule/ErrorModule.package.json")),
-                path: join(__dirname, "ressource/ErrorModule")
+                package: require(join(__dirname, "ressource/ExtraData/ExtraData.package.json")),
+                path: join(__dirname, "ressource/ExtraData")
             };
         }
     }
@@ -27,6 +27,10 @@ class TestClass {
     public doActionB() {
         return Promise.reject(this.error.createError("01", "TestClass"))
     }
+
+    public doActionC() {
+        return Promise.reject(this.error.createError("01", "TestClass", {httpCode: 202}));
+    }
 }
 
 describe("Integration Test", () => {
@@ -37,26 +41,37 @@ describe("Integration Test", () => {
         inject = new Injector;
     });
 
-    it("Should give error code 00", (done) => {
+    it("Error Should contain Extra Error Data", (done) => {
         let test = inject.inject(TestClass);
 
         test.doActionA()
-        .catch((error: ErrorContent) => {
+        .catch((error) => {
             expect(error.code).toBe("00");
-            expect(error.why).toBe("No Error")
+            expect(error.httpCode).toBe(200);
+            done();
+        })
+    });
+
+    it("Error Should contain Extra Error Data", (done) => {
+        let test = inject.inject(TestClass);
+
+        test.doActionB()
+        .catch((error) => {
+            expect(error.code).toBe("01");
+            expect(error.httpCode).toBe(404);
             done();
         });
     });
 
-    it("Should give error code 01", (done) => {
+    it("Overide Extra Data", (done) => {
         let test = inject.inject(TestClass);
 
-        test.doActionB()
-        .catch((error: ErrorContent) => {
+        test.doActionC()
+        .catch((error) => {
             expect(error.code).toBe("01");
-            expect(error.why).toBe("Info Not Found");
+            expect(error.httpCode).toBe(202);
             done();
-        });
+        })
     });
 
 });
