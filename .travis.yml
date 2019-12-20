@@ -26,7 +26,6 @@ jobs:
         - lerna run build
         - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
         - lerna publish --npm-tag beta
-  include:
     - stage: "Release"
       if: tag IS present
       node_js: '10'
