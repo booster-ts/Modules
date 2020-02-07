@@ -32,6 +32,14 @@ export class ErrorModule {
         return error;
     }
 
+    /**
+     * isError
+     * @description Check if the object is an IError object
+     * @param error object you want to test
+     */
+    public isError(error: object): boolean {
+        return (error && error.hasOwnProperty('code') && error.hasOwnProperty('why') && error.hasOwnProperty('from'));
+    }
 }
 
 export interface ErrorContent {

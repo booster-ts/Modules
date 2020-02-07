@@ -59,4 +59,30 @@ describe("Integration Test", () => {
         });
     });
 
+    describe("IsError", () => {
+
+        let inject: Injector;
+
+        beforeEach(() => {
+            inject = new Injector;
+        });
+
+        it("Should fail because the object is not an IError object", () => {
+            let errorModule = inject.inject(ErrorModule);
+            const error = {foo: "bar"};
+
+            expect(errorModule.isError(error)).toBe(false);
+        });
+
+        it("Should pass because the object is an IError object", () => {
+            let errorModule = inject.inject(ErrorModule);
+            const error = {
+                code: "200",
+                why: "foo",
+                from: "bar"
+            };
+
+            expect(errorModule.isError(error)).toBe(true);
+        });
+    });
 });
