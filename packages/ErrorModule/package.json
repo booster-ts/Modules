@@ -5,11 +5,14 @@
   "main": "dist/Error.js",
   "scripts": {
     "setup": "(npm ci || npm i) && install-peers -f",
-    "test:unit": "jest -c tests/jest.unit.js",
+    "test:unit": "true",
     "test:func": "jest -c tests/jest.func.js",
     "build": "tsc"
   },
-  "keywords": [],
+  "keywords": [
+    "error-module",
+    "error"
+  ],
   "author": "ImOverlord",
   "license": "ISC",
   "dependencies": {},
