@@ -6,7 +6,7 @@ import { join } from 'path';
 export class ErrorModule {
 
     private errorCodes: IError;
-    private callbacks: Array<(error: IError) => void> = [];
+    private callbacks: Array<(error: ErrorContent) => void> = [];
 
     constructor() {
         const options = loadMainPackageJSON();
@@ -35,7 +35,7 @@ export class ErrorModule {
         return error;
     }
 
-    public use(callback: (error: IError) => void) {
+    public use(callback: (error: ErrorContent) => void) {
         this.callbacks.push(callback)
     }
 
