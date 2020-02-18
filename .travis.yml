@@ -26,7 +26,7 @@ jobs:
         - lerna bootstrap
         - lerna run build
         - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
-        - lerna publish --npm-tag beta
+        - npm run lerna:publish:beta
 
     - stage: "Release"
       if: tag IS present
@@ -35,4 +35,4 @@ jobs:
         - lerna bootstrap
         - lerna run build
         - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
-        - lerna publish --npm-tag latest
+        - npm run lerna:publish:latest
