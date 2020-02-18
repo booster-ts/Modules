@@ -5,8 +5,8 @@
     "test": "lerna run test:unit",
     "install": "lerna run setup",
     "build": "lerna run build",
-    "lerna:publish:beta": "lerna publish from-git --yes --npm-client yarn --npm-tag beta",
-    "lerna:publish:latest": "lerna publish from-git --yes --npm-client yarn --npm-tag latest"
+    "lerna:publish:beta": "lerna publish from-git --yes --npm-tag beta",
+    "lerna:publish:latest": "lerna publish from-git --yes --npm-tag latest"
   },
   "devDependencies": {
     "lerna": "^3.18.3"
