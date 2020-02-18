@@ -2,7 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "test": "lerna run test:unit",
+    "test": "lerna run test:unit && lerna run test:func",
     "install": "lerna run setup",
     "build": "lerna run build",
     "lerna:publish:beta": "lerna publish from-git --yes --npm-tag beta",

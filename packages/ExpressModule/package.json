@@ -6,6 +6,7 @@
   "scripts": {
     "setup": "npm ci || npm i",
     "test:unit": "true",
+    "test:func": "true",
     "build": "tsc"
   },
   "keywords": [],
