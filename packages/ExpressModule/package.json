@@ -12,20 +12,18 @@
   "keywords": [],
   "author": "ImOverlord",
   "license": "ISC",
-  "dependencies": {
-    "@booster-ts/core": "^0.2.1",
-    "@types/express": "^4.17.2",
-    "express": "^4.17.1",
-    "reflect-metadata": "^0.1.13",
-    "typescript": "^3.6.4"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "typescript": "^3.6.4",
     "@types/jest": "^24.0.20",
     "jest": "^24.9.0",
-    "ts-jest": "^24.1.0"
+    "ts-jest": "^24.1.0",
+    "@types/express": "^4.17.2"
   },
   "peerDependencies": {
-    "@types/express": "^4.17.2"
+    "@booster-ts/core": "^0.2.1",
+    "reflect-metadata": "^0.1.13",
+    "express": "^4.17.1"
   },
   "publishConfig": {
     "access": "public"
