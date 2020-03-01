@@ -1,5 +1,5 @@
-import {} from '../../src/utils';
-import { ErrorModule, ErrorContent } from '../../src/Error';
+import '../../src/utils';
+import { ErrorModule, ErrorContent, IError } from '../../src/Error';
 import { Injector, booster } from '@booster-ts/core';
 import { join } from 'path';
 
@@ -18,7 +18,13 @@ jest.mock('../../src/utils', () => {
 class TestClass {
     constructor(
         private error: ErrorModule
-    ) { }
+    ) {
+        this.error.use(this.hook.bind(this));
+    }
+
+    public hook(error: IError) {
+        return;
+    }
 
     public doActionA() {
         return Promise.reject(this.error.createError("00", "TestClass"))
@@ -33,30 +39,33 @@ describe("Integration Test", () => {
 
     let inject: Injector;
 
-    beforeEach(() => {
-        inject = new Injector;
-    });
+    describe('Basic Tests', () => {
 
-    it("Should give error code 00", (done) => {
-        let test = inject.inject(TestClass);
+        let test: TestClass;
 
-        test.doActionA()
-        .catch((error: ErrorContent) => {
-            expect(error.code).toBe("00");
-            expect(error.why).toBe("No Error")
-            done();
+        beforeEach(() => {
+            inject = new Injector;
+            test = inject.inject(TestClass);
         });
-    });
 
-    it("Should give error code 01", (done) => {
-        let test = inject.inject(TestClass);
-
-        test.doActionB()
-        .catch((error: ErrorContent) => {
-            expect(error.code).toBe("01");
-            expect(error.why).toBe("Info Not Found");
-            done();
+        it("Should give error code 00", (done) => {
+            test.doActionA()
+            .catch((error: ErrorContent) => {
+                expect(error.code).toBe("00");
+                expect(error.why).toBe("No Error")
+                done();
+            });
         });
+
+        it("Should give error code 01", (done) => {
+            test.doActionB()
+            .catch((error: ErrorContent) => {
+                expect(error.code).toBe("01");
+                expect(error.why).toBe("Info Not Found");
+                done();
+            });
+        });
+
     });
 
     describe("IsError", () => {
@@ -85,4 +94,44 @@ describe("Integration Test", () => {
             expect(errorModule.isError(error)).toBe(true);
         });
     });
+
+    describe("Hooks", () => {
+
+        let test: TestClass;
+
+        beforeEach(() => {
+            inject = new Injector;
+            test = inject.inject(TestClass);
+        });
+
+        it("Should call hook", (done) => {
+            const hookSpy = spyOn(test,'hook').and.callFake((error) => {
+                expect(error.code).toBe("00");
+                expect(error.why).toBe("No Error")
+            });
+
+            inject.inject(ErrorModule).use(test.hook);
+
+            test.doActionA().catch(() => {
+                expect(hookSpy).toHaveBeenCalled();
+                done();
+            })
+        });
+
+        it("Should call all hooks", (done) => {
+            const hookSpy = spyOn(test,'hook').and.callFake((error) => {
+                expect(error.code).toBe("00");
+                expect(error.why).toBe("No Error")
+            });
+
+            inject.inject(ErrorModule).use(test.hook);
+            inject.inject(ErrorModule).use(test.hook);
+
+            test.doActionA().catch(() => {
+                expect(hookSpy).toHaveBeenCalledTimes(2);
+                done();
+            })
+        });
+    })
+    
 });
