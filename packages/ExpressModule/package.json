@@ -4,7 +4,7 @@
   "description": "Error Module For Server",
   "main": "dist/Express.js",
   "scripts": {
-    "setup": "npm ci || npm i",
+    "setup": "(npm ci || npm i) && install-peers -f",
     "test:unit": "true",
     "test:func": "true",
     "build": "tsc"
@@ -18,7 +18,8 @@
     "@types/jest": "^24.0.20",
     "jest": "^24.9.0",
     "ts-jest": "^24.1.0",
-    "@types/express": "^4.17.2"
+    "@types/express": "^4.17.2",
+    "install-peers-cli": "^2.2.0"
   },
   "peerDependencies": {
     "@booster-ts/core": "^0.2.1",
