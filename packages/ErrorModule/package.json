@@ -1,6 +1,6 @@
 {
   "name": "@booster-ts/error-module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Error Module For Server",
   "main": "dist/Error.js",
   "scripts": {
@@ -15,7 +15,6 @@
   ],
   "author": "ImOverlord",
   "license": "ISC",
-  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^24.0.20",
     "install-peers-cli": "^2.2.0",
