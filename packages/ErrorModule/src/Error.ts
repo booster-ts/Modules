@@ -6,6 +6,7 @@ import { join } from 'path';
 export class ErrorModule {
 
     private errorCodes: IError;
+    private callbacks: Array<(error: ErrorContent) => void> = [];
 
     constructor() {
         const options = loadMainPackageJSON();
@@ -29,7 +30,13 @@ export class ErrorModule {
             systemError
         }
         error = { ...error, ...this.errorCodes[code], ...overides };
+        for (const callback of this.callbacks)
+            callback(error);
         return error;
+    }
+
+    public use(callback: (error: ErrorContent) => void) {
+        this.callbacks.push(callback)
     }
 
     /**
@@ -40,6 +47,7 @@ export class ErrorModule {
     public isError(error: object): boolean {
         return (error && error.hasOwnProperty('code') && error.hasOwnProperty('why') && error.hasOwnProperty('from'));
     }
+
 }
 
 export interface ErrorContent {

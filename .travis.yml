@@ -10,7 +10,7 @@ cache: npm
 
 install:
   - npm i -g lerna
-  - lerna bootstrap
+  - npm i
 
 script:
   - lerna run build
