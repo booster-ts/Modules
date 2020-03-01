@@ -1,6 +1,6 @@
 {
   "name": "@booster-ts/error-module",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Error Module For Server",
   "main": "dist/Error.js",
   "scripts": {
